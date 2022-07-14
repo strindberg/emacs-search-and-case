@@ -1,18 +1,69 @@
-<!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
 <idea-plugin>
     <id>com.github.strindberg.emacssearchandcase</id>
-    <name>emacs-search-and-case</name>
+    <name>Emacs Search And Case</name>
     <vendor>strindberg</vendor>
 
     <depends>com.intellij.modules.platform</depends>
 
     <extensions defaultExtensionNs="com.intellij">
-        <applicationService serviceImplementation="com.github.strindberg.emacssearchandcase.services.MyApplicationService"/>
-        <projectService serviceImplementation="com.github.strindberg.emacssearchandcase.services.MyProjectService"/>
+        <actionPromoter implementation="com.github.strindberg.emacssearchandcase.search.ISearchActionsPromoter" order="last" />
     </extensions>
 
-    <applicationListeners>
-        <listener class="com.github.strindberg.emacssearchandcase.listeners.MyProjectManagerListener"
-                  topic="com.intellij.openapi.project.ProjectManagerListener"/>
-    </applicationListeners>
+    <actions>
+        <action id="ISearchForward" class="com.github.strindberg.emacssearchandcase.actions.ISearchForwardAction"
+                text="Isearch Forward">
+            <keyboard-shortcut first-keystroke="ctrl s" keymap="$default" />
+        </action>
+        <action id="RegexpSearchForward" class="com.github.strindberg.emacssearchandcase.actions.RegexpSearchForwardAction"
+                text="Regexp Search Forward">
+            <keyboard-shortcut first-keystroke="alt s" keymap="$default" />
+        </action>
+        <action id="ISearchBackward" class="com.github.strindberg.emacssearchandcase.actions.ISearchBackwardAction"
+                text="Isearch Backward">
+            <keyboard-shortcut first-keystroke="ctrl r" keymap="$default" />
+        </action>
+        <action id="RegexpSearchBackward" class="com.github.strindberg.emacssearchandcase.actions.RegexpSearchBackwardAction"
+                text="Regexp Search Backward">
+            <keyboard-shortcut first-keystroke="alt r" keymap="$default" />
+        </action>
+        <action id="ISearchWord" class="com.github.strindberg.emacssearchandcase.actions.ISearchWordAction"
+                text="Isearch Word">
+            <keyboard-shortcut first-keystroke="ctrl w" keymap="$default" />
+        </action>
+
+        <action id="UpperCase" class="com.github.strindberg.emacssearchandcase.actions.UpperCaseAction" text="Upper Case Word">
+            <keyboard-shortcut first-keystroke="alt u" keymap="$default" />
+        </action>
+        <action id="LowerCase" class="com.github.strindberg.emacssearchandcase.actions.LowerCaseAction" text="Lower Case Word">
+            <keyboard-shortcut first-keystroke="alt l" keymap="$default" />
+        </action>
+        <action id="CapitalCase" class="com.github.strindberg.emacssearchandcase.actions.CapitalCaseAction" text="Capital Case Word">
+            <keyboard-shortcut first-keystroke="alt c" keymap="$default" />
+        </action>
+
+        <action id="NextWord" class="com.github.strindberg.emacssearchandcase.actions.NextWordAction" text="Move to Next Word">
+            <keyboard-shortcut first-keystroke="alt f" keymap="$default" />
+        </action>
+        <action id="PreviousWord" class="com.github.strindberg.emacssearchandcase.actions.PreviousWordAction"
+                text="Move to Previous Word">
+            <keyboard-shortcut first-keystroke="alt b" keymap="$default" />
+        </action>
+
+        <action id="DeleteNextWord" class="com.github.strindberg.emacssearchandcase.actions.DeleteNextWordAction" text="Delete Next Word">
+            <keyboard-shortcut first-keystroke="alt d" keymap="$default" />
+        </action>
+        <action id="DeletePreviousWord" class="com.github.strindberg.emacssearchandcase.actions.DeletePreviousWordAction"
+                text="Delete Previous Word" />
+        <!--            <keyboard-shortcut first-keystroke="alt back_space" keymap="$default" />-->
+        <!--        </action>-->
+
+        <action id="TransposeWords" class="com.github.strindberg.emacssearchandcase.actions.TransposeWordsAction" text="Transpose Words">
+            <keyboard-shortcut first-keystroke="alt t" keymap="$default" />
+        </action>
+        <action id="ReverseTransposeWords" class="com.github.strindberg.emacssearchandcase.actions.ReversTransposeWordsAction"
+                text="Transpose Words Reverse">
+            <keyboard-shortcut first-keystroke="shift alt t" keymap="$default" />
+        </action>
+    </actions>
+
 </idea-plugin>
